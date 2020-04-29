@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import modelo.OperacionesCRUD;
 import java.sql.CallableStatement;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -177,14 +176,7 @@ public class PacienteDAO implements OperacionesCRUD{
         Connection con;
         PreparedStatement pst;
         ResultSet rs;
-        String sql = "select rut_paciente, upper(nombre), "
-                + "upper(ap_paterno), upper(ap_materno), upper(direccion),"
-                + "upper(email),nro_celular,fecha_nacimiento,upper(sexo),"
-                + "upper(comuna),upper(nombre_familiar),nro_familiar,upper(email_familiar) "
-                + "where rut_paciente like '"+valor+"' or upper(nombre) "
-                + "like upper('%"+valor+"%') or upper(ap_paterno) like upper('%"+valor+"%')"
-                + "or upper(ap_materno) like upper('%"+valor+"%') from paciente order by rut_paciente";
-    
+        String sql = "select rut_paciente, upper(nombre),upper(ap_paterno), upper(ap_materno), upper(direccion),upper(email),nro_celular,fecha_nacimiento,upper(sexo),upper(comuna),upper(nombre_familiar),nro_familiar,upper(email_familiar) from paciente where rut_paciente like '%"+valor+"%' or upper(nombre) like upper('%"+valor+"%') or upper(ap_paterno) like upper('%"+valor+"%') order by rut_paciente";    
         try {
             Class.forName(db.getDriver());
             con=DriverManager.getConnection(
@@ -204,7 +196,7 @@ public class PacienteDAO implements OperacionesCRUD{
             }
             con.close();
         } catch (SQLException | ClassNotFoundException e) {
-            JOptionPane.showMessageDialog(null, "Error consultar medicamento: "+e.getMessage());
+            JOptionPane.showMessageDialog(null, "Error filtrar medicamento: "+e.getMessage());
         }finally{
             return data;
         }

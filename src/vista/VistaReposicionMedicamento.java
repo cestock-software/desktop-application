@@ -17,7 +17,7 @@ import modelo.ReposicionMedicamento;
 public class VistaReposicionMedicamento extends javax.swing.JFrame implements Runnable{
     
     String columnas[] = {"CODIGO","NOMBRE","FORMATO","GR/ML","LABORATORIO","DISPONIBLE"};
-    String columnas2[] = {"CODIGO","CANTIDAD","REPOSICION","VENCIMIENTO"};
+    String columnas2[] = {"ID","CODIGO","CANTIDAD","REPOSICION","VENCIMIENTO","FARMACEUTICO"};
     DefaultTableModel modelo = new DefaultTableModel(columnas,0);
     DefaultTableModel modelo2 = new DefaultTableModel(columnas2,0);
     MedicamentoDAO dao = new MedicamentoDAO();
@@ -42,6 +42,7 @@ public class VistaReposicionMedicamento extends javax.swing.JFrame implements Ru
         ImageIcon ImageIcon = new ImageIcon(getClass().getResource("/recursos/icono12x12.jpg"));
         Image Image = ImageIcon.getImage();
         this.setIconImage(Image);
+        idreposicion.setEnabled(false);
     }
     
     private void cargar(){
@@ -143,6 +144,8 @@ public class VistaReposicionMedicamento extends javax.swing.JFrame implements Ru
         vencimientoChooser = new rojeru_san.componentes.RSDateChooser();
         reposicionChooser = new rojeru_san.componentes.RSDateChooser();
         lblcantidad2 = new javax.swing.JLabel();
+        idreposicion = new javax.swing.JTextField();
+        lblCodigo2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -401,16 +404,16 @@ public class VistaReposicionMedicamento extends javax.swing.JFrame implements Ru
 
         lblsubtitulo1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblsubtitulo1.setText("MEDICAMENTOS REPUESTOS");
-        panelprincipal.add(lblsubtitulo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 70, -1, 30));
+        panelprincipal.add(lblsubtitulo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 70, -1, 30));
 
         txtcodigo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtcodigo.setForeground(new java.awt.Color(33, 52, 110));
         txtcodigo.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(33, 52, 110)));
-        panelprincipal.add(txtcodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 300, 160, 30));
+        panelprincipal.add(txtcodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 300, 90, 30));
 
         lblCodigo1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblCodigo1.setForeground(new java.awt.Color(33, 52, 110));
-        lblCodigo1.setText("CODIGO");
+        lblCodigo1.setText("ID");
         panelprincipal.add(lblCodigo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 310, -1, -1));
 
         lblcantidad1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -442,6 +445,18 @@ public class VistaReposicionMedicamento extends javax.swing.JFrame implements Ru
         lblcantidad2.setText("VENCIMIENTO");
         panelprincipal.add(lblcantidad2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 430, -1, -1));
 
+        idreposicion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                idreposicionActionPerformed(evt);
+            }
+        });
+        panelprincipal.add(idreposicion, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 300, 80, 30));
+
+        lblCodigo2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblCodigo2.setForeground(new java.awt.Color(33, 52, 110));
+        lblCodigo2.setText("CODIGO");
+        panelprincipal.add(lblCodigo2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 310, -1, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -462,7 +477,7 @@ public class VistaReposicionMedicamento extends javax.swing.JFrame implements Ru
         Date fecha2 = reposicionChooser.getDatoFecha();
         SimpleDateFormat formateador = new SimpleDateFormat(formatoFecha);
         ReposicionMedicamento rm = new ReposicionMedicamento
-                            (Integer.parseInt(txtcodigo.getText()),Integer.parseInt(txtcodigo.getText()),
+                            (Integer.parseInt(idreposicion.getText()),Integer.parseInt(txtcodigo.getText()),
                                     Integer.parseInt(txtcantidad.getText()),
                                     formateador.format(fecha2),
                                     formateador.format(fecha),
@@ -472,8 +487,10 @@ public class VistaReposicionMedicamento extends javax.swing.JFrame implements Ru
         }else{
             JOptionPane.showMessageDialog(this, "Error, no se ha podido realizar la reposición");
         }
-        cargar();
         cargarReposicion(); 
+        cargar(); 
+        txtcodigo.setEnabled(true);
+        txtcantidad.setEnabled(true);
     }//GEN-LAST:event_btneliminarActionPerformed
 
     private void btnagregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnagregarActionPerformed
@@ -492,8 +509,10 @@ public class VistaReposicionMedicamento extends javax.swing.JFrame implements Ru
         }else{
             JOptionPane.showMessageDialog(this, "Error, no se ha podido realizar la reposición");
         }
-        cargar();
         cargarReposicion();
+        cargar();
+        txtcodigo.setEnabled(true);
+        txtcantidad.setEnabled(true);
     }//GEN-LAST:event_btnagregarActionPerformed
 
     private void txtbuscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtbuscarKeyTyped
@@ -505,29 +524,30 @@ public class VistaReposicionMedicamento extends javax.swing.JFrame implements Ru
         int filaseleccionada2 = tablamedicamentos.getSelectedRow();
         String dao = (String)tablamedicamentos.getValueAt(filaseleccionada2, 0);
         txtcodigo.setText(tablamedicamentos.getValueAt(filaseleccionada,0).toString());
-        reposicionChooser.setDatoFecha(null);
-        vencimientoChooser.setDatoFecha(null);
         txtcantidad.setText(" ");
         filtrarClick(dao);
+        reposicionChooser.setDatoFecha(null);
+        vencimientoChooser.setDatoFecha(null);
     }//GEN-LAST:event_tablamedicamentosMouseClicked
 
     private void tablamedicamentosKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tablamedicamentosKeyReleased
         int filaseleccionada = tablamedicamentos.getSelectedRow();
         int filaseleccionada2 = tablamedicamentos.getSelectedRow();
         String dao = (String)tablamedicamentos.getValueAt(filaseleccionada2, 0);
-        txtcodigo.setText(tablamedicamentos.getValueAt(filaseleccionada,0).toString());
-        reposicionChooser.setDatoFecha(null);
-        vencimientoChooser.setDatoFecha(null);
+        txtcodigo.setText(tablamedicamentos.getValueAt(filaseleccionada,0).toString());      
         txtcantidad.setText(" ");
         filtrarClick(dao);
+        reposicionChooser.setDatoFecha(null);
+        vencimientoChooser.setDatoFecha(null);
     }//GEN-LAST:event_tablamedicamentosKeyReleased
 
     private void tablamedicamentosrespuestosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablamedicamentosrespuestosMouseClicked
         int filaseleccionada = tablamedicamentosrespuestos.rowAtPoint(evt.getPoint());
-        txtcodigo.setText(tablamedicamentosrespuestos.getValueAt(filaseleccionada,0).toString());
-        txtcantidad.setText(tablamedicamentosrespuestos.getValueAt(filaseleccionada,1).toString());
-        reposicionChooser.setDatoFecha((Date)tablamedicamentosrespuestos.getValueAt(filaseleccionada,2));
-        vencimientoChooser.setDatoFecha((Date)tablamedicamentosrespuestos.getValueAt(filaseleccionada,3));
+        idreposicion.setText(tablamedicamentosrespuestos.getValueAt(filaseleccionada,0).toString());
+        txtcodigo.setText(tablamedicamentosrespuestos.getValueAt(filaseleccionada,1).toString());
+        txtcantidad.setText(tablamedicamentosrespuestos.getValueAt(filaseleccionada,2).toString());
+        reposicionChooser.setDatoFecha((Date)tablamedicamentosrespuestos.getValueAt(filaseleccionada,3));
+        vencimientoChooser.setDatoFecha((Date)tablamedicamentosrespuestos.getValueAt(filaseleccionada,4));
         txtcodigo.setEnabled(false);
         txtcantidad.setEnabled(false);
 
@@ -535,10 +555,11 @@ public class VistaReposicionMedicamento extends javax.swing.JFrame implements Ru
 
     private void tablamedicamentosrespuestosKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tablamedicamentosrespuestosKeyReleased
         int filaseleccionada = tablamedicamentosrespuestos.getSelectedRow();
-        txtcodigo.setText(tablamedicamentosrespuestos.getValueAt(filaseleccionada,0).toString());
-        txtcantidad.setText(tablamedicamentosrespuestos.getValueAt(filaseleccionada,1).toString());
-        reposicionChooser.setDatoFecha((Date)tablamedicamentosrespuestos.getValueAt(filaseleccionada,2));
-        vencimientoChooser.setDatoFecha((Date)tablamedicamentosrespuestos.getValueAt(filaseleccionada,3));
+        idreposicion.setText(tablamedicamentosrespuestos.getValueAt(filaseleccionada,0).toString());
+        txtcodigo.setText(tablamedicamentosrespuestos.getValueAt(filaseleccionada,1).toString());
+        txtcantidad.setText(tablamedicamentosrespuestos.getValueAt(filaseleccionada,2).toString());
+        reposicionChooser.setDatoFecha((Date)tablamedicamentosrespuestos.getValueAt(filaseleccionada,3));
+        vencimientoChooser.setDatoFecha((Date)tablamedicamentosrespuestos.getValueAt(filaseleccionada,4));
         txtcodigo.setEnabled(false);
         txtcantidad.setEnabled(false);
     }//GEN-LAST:event_tablamedicamentosrespuestosKeyReleased
@@ -560,7 +581,7 @@ public class VistaReposicionMedicamento extends javax.swing.JFrame implements Ru
 
     private void btnlimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnlimpiarActionPerformed
         btnagregar.setEnabled(true);
- 
+        idreposicion.setText(" ");
         txtcodigo.setText(" ");
         txtcantidad.setText(" ");
         reposicionChooser.setDatoFecha(null);
@@ -571,6 +592,10 @@ public class VistaReposicionMedicamento extends javax.swing.JFrame implements Ru
         cargarReposicion();
         cargar();
     }//GEN-LAST:event_btnlimpiarActionPerformed
+
+    private void idreposicionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idreposicionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_idreposicionActionPerformed
 
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(() -> {
@@ -583,9 +608,11 @@ public class VistaReposicionMedicamento extends javax.swing.JFrame implements Ru
     public keeptoo.KButton btneliminar;
     public keeptoo.KButton btnlimpiar;
     public keeptoo.KButton btnvolver;
+    private javax.swing.JTextField idreposicion;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel lblCodigo1;
+    private javax.swing.JLabel lblCodigo2;
     private javax.swing.JLabel lblbienvenido;
     private javax.swing.JLabel lblbuscar;
     private javax.swing.JLabel lblcantidad;

@@ -159,7 +159,7 @@ public class Login extends javax.swing.JFrame {
                 btningresarActionPerformed(evt);
             }
         });
-        jPanel1.add(btningresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 210, 90, 50));
+        jPanel1.add(btningresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 180, 90, 50));
 
         lbltitulo.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         lbltitulo.setForeground(new java.awt.Color(33, 52, 110));
@@ -186,7 +186,7 @@ public class Login extends javax.swing.JFrame {
             .addGap(0, 10, Short.MAX_VALUE)
         );
 
-        jPanel1.add(panelabajo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 190, 310, 10));
+        jPanel1.add(panelabajo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 240, 310, 10));
 
         panelabajo2.setkEndColor(new java.awt.Color(255, 255, 255));
         panelabajo2.setkGradientFocus(700);
@@ -217,10 +217,10 @@ public class Login extends javax.swing.JFrame {
         );
         panelizquierdo1Layout.setVerticalGroup(
             panelizquierdo1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 120, Short.MAX_VALUE)
+            .addGap(0, 160, Short.MAX_VALUE)
         );
 
-        jPanel1.add(panelizquierdo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 80, 10, 120));
+        jPanel1.add(panelizquierdo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 80, 10, 160));
 
         panelizquierdo2.setkEndColor(new java.awt.Color(33, 52, 110));
         panelizquierdo2.setkGradientFocus(50);
@@ -234,10 +234,10 @@ public class Login extends javax.swing.JFrame {
         );
         panelizquierdo2Layout.setVerticalGroup(
             panelizquierdo2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 120, Short.MAX_VALUE)
+            .addGap(0, 160, Short.MAX_VALUE)
         );
 
-        jPanel1.add(panelizquierdo2, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 80, 10, 120));
+        jPanel1.add(panelizquierdo2, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 80, 10, 160));
 
         lbllogo2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/logo_33_39.jpg"))); // NOI18N
         jPanel1.add(lbllogo2, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 20, 40, 40));

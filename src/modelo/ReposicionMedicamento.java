@@ -1,8 +1,6 @@
 /** SATELITE CESTOCK 2020 ** @author Hans Benavides **/
 package modelo;
 
-import java.sql.Date;
-
 public class ReposicionMedicamento {
     private int id_reposicion;
     private int id_medicamento;

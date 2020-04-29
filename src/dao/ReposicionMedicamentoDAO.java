@@ -71,7 +71,7 @@ public class ReposicionMedicamentoDAO implements OperacionesCRUD{
                     db.getPwd()
             );
             cst = con.prepareCall(sp);
-            cst.setInt(1, rm.getId_medicamento());
+            cst.setInt(1, rm.getId_reposicion());
             int filas = cst.executeUpdate();
             
             if(filas>0){
@@ -102,7 +102,7 @@ public class ReposicionMedicamentoDAO implements OperacionesCRUD{
         Connection con;
         PreparedStatement pst;
         ResultSet rs;
-        String sql = "select id_medicamento, cantidad_repuesta, fecha_reposicion, fecha_vencimiento from reposicion";
+        String sql = "select id_reposicion,id_medicamento,cantidad_repuesta,fecha_reposicion,fecha_vencimiento,nombre_farmaceutico from reposicion";
     
         try {
             Class.forName(db.getDriver());
@@ -114,8 +114,8 @@ public class ReposicionMedicamentoDAO implements OperacionesCRUD{
             pst = con.prepareStatement(sql);
             rs = pst.executeQuery();
             while(rs.next()){
-                Object[] fila = new Object[4];
-                for(int i=0; i<=3;i++){
+                Object[] fila = new Object[6];
+                for(int i=0; i<=5;i++){
                     fila[i] = rs.getObject(i+1);
                 }
                 data.add(fila);
@@ -134,7 +134,7 @@ public class ReposicionMedicamentoDAO implements OperacionesCRUD{
         Connection con;
         PreparedStatement pst;
         ResultSet rs;
-        String sql = "select upper(id_medicamento), upper(nombre_medicamento), upper(formato), upper(gr_ml), upper(laboratorio),total_disponible from medicamento where id_medicamento like '"+valor+"' or upper(nombre_medicamento) like upper('%"+valor+"%')";
+        String sql = "select upper(id_medicamento), upper(nombre_medicamento), upper(formato), upper(gr_ml), upper(laboratorio),total_disponible from medicamento where id_medicamento like '"+valor+"' or upper(nombre_medicamento) like upper('%"+valor+"%') order by id_reposicion";
         
         try {
             Class.forName(db.getDriver());
@@ -166,7 +166,7 @@ public class ReposicionMedicamentoDAO implements OperacionesCRUD{
         Connection con;
         PreparedStatement pst;
         ResultSet rs;
-        String sql = "select id_medicamento, cantidad_repuesta, fecha_reposicion, fecha_vencimiento from reposicion where id_medicamento like '"+valor+"'";
+        String sql = "select id_reposicion,id_medicamento, cantidad_repuesta, fecha_reposicion, fecha_vencimiento, nombre_farmaceutico from reposicion where id_medicamento like '"+valor+"'";
     
         try {
             Class.forName(db.getDriver());
@@ -178,8 +178,8 @@ public class ReposicionMedicamentoDAO implements OperacionesCRUD{
             pst = con.prepareStatement(sql);
             rs = pst.executeQuery();
             while(rs.next()){
-                Object[] fila = new Object[4];
-                for(int i=0; i<=3;i++){
+                Object[] fila = new Object[6];
+                for(int i=0; i<=5;i++){
                     fila[i] = rs.getObject(i+1);
                 }
                 data.add(fila);
