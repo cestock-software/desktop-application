@@ -255,7 +255,7 @@ public class VistaFarmaceutico extends javax.swing.JFrame implements Runnable {
         panelprincipal.add(lblbienvenido, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 430, -1, -1));
 
         lbltitulo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lbltitulo.setText("GESTION DE CONTROL DE STOCK Y ENTREGA DE MEDICAMENTOS CESTOCK");
+        lbltitulo.setText("GESTIÓN DE CONTROL DE STOCK Y ENTREGA DE MEDICAMENTOS CESTOCK");
         panelprincipal.add(lbltitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 20, -1, -1));
 
         lblsubtitulo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -473,9 +473,9 @@ public class VistaFarmaceutico extends javax.swing.JFrame implements Runnable {
     }// </editor-fold>//GEN-END:initComponents
     
     private void btnentregaMedicamentosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnentregaMedicamentosMouseClicked
-//        VistaEntregaMedicamentos vem = new VistaEntregaMedicamentos();
-//        vem.setVisible(true);
-//        this.dispose();
+        VistaEntregaMedicamento vem = new VistaEntregaMedicamento();
+        vem.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnentregaMedicamentosMouseClicked
 
     private void btnreposicionMedicamentosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnreposicionMedicamentosMouseClicked

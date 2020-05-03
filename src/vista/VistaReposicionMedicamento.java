@@ -524,7 +524,7 @@ public class VistaReposicionMedicamento extends javax.swing.JFrame implements Ru
         int filaseleccionada2 = tablamedicamentos.getSelectedRow();
         String dao = (String)tablamedicamentos.getValueAt(filaseleccionada2, 0);
         txtcodigo.setText(tablamedicamentos.getValueAt(filaseleccionada,0).toString());
-        txtcantidad.setText(" ");
+        txtcantidad.setText("");
         filtrarClick(dao);
         reposicionChooser.setDatoFecha(null);
         vencimientoChooser.setDatoFecha(null);
@@ -535,7 +535,7 @@ public class VistaReposicionMedicamento extends javax.swing.JFrame implements Ru
         int filaseleccionada2 = tablamedicamentos.getSelectedRow();
         String dao = (String)tablamedicamentos.getValueAt(filaseleccionada2, 0);
         txtcodigo.setText(tablamedicamentos.getValueAt(filaseleccionada,0).toString());      
-        txtcantidad.setText(" ");
+        txtcantidad.setText("");
         filtrarClick(dao);
         reposicionChooser.setDatoFecha(null);
         vencimientoChooser.setDatoFecha(null);

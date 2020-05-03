@@ -292,7 +292,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="14" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="GESTION DE CONTROL DE STOCK Y ENTREGA DE MEDICAMENTOS CESTOCK"/>
+            <Property name="text" type="java.lang.String" value="GESTI&#xd3;N DE CONTROL DE STOCK Y ENTREGA DE MEDICAMENTOS CESTOCK"/>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">

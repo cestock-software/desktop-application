@@ -8,7 +8,7 @@ public class DataBase {
     String driver;
 
     public DataBase() {
-        this.url = "jdbc:oracle:thin:@//localhost:1521/xepdb1";   
+        this.url = "jdbc:oracle:thin:@//localhost:1521/xe";   
         this.uss = "CESTOCK";
         this.pwd = "cestock";
         this.driver = "oracle.jdbc.OracleDriver";
